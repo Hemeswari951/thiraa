@@ -1,6 +1,6 @@
 // ============================================================================
 //  routes/admin/settings.routes.js
-//  adminAuth is already applied in routes/admin/index.js
+// adminAuth is applied to this router below.
 //  so every route here is automatically protected
 // ============================================================================
  
@@ -8,7 +8,7 @@ const router    = require('express').Router();
 const ctrl      = require('../../controllers/admin/settings.controller');
 const { upload } = require('../../middleware/upload');  // multer — memory storage
 const { body, validationResult } = require('express-validator');
-const adminAuth = require('../../middleware/adminAuth'); // ⚠ adjust this path/filename to match your project
+const adminAuth = require('../../middleware/adminauth');
  
 // Applied directly here so these routes work regardless of whether it's
 // also applied globally in server.js / routes/admin/index.js. If your
