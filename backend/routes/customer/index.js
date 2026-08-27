@@ -7,6 +7,7 @@ router.use('/search', require('./search.routes'));
 
 router.use('/products', require('./product.routes'));
 router.use('/wishlist', require('./wishlist.routes'));
+router.use('/settings', require('./settings.routes'));
 
 // Trial on
 router.use('/style-profile', require('./style_profile.routes'));

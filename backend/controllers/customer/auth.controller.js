@@ -10,6 +10,7 @@ const {
 } = require("../../services/shared/token.service");
 
 const PORTAL = "customer";
+const { sendOtpSms } = require('../../services/customer/sms.service');
 
 // ==============================
 // HELPERS
@@ -95,33 +96,37 @@ exports.sendOtp = async (req, res) => {
         console.log("=========================================");
 
         // Send OTP via SMS or Mail
-        if (isPhone(identifier)) {
-            // await sendOtpSms(identifier, otp);
-        } else {
-            await sendOtpMail({
-                toEmail: identifier,
-                otp: otp,
-                purpose: purpose,
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            message: "OTP sent successfully",
-            isNewUser,
-            isPhone: isPhone(identifier),
-            identifier,
-            purpose,
-        });
-    } catch (err) {
-        console.log("Send OTP Error :", err);
-
-        return res.status(500).json({
-            success: false,
-            message: "Server Error",
-        });
+    if (isPhone(identifier)) {
+      await sendOtpSms({
+    phoneNumber: identifier,
+    otp: otp,
+  });
+    } else {
+      await sendOtpMail({
+        toEmail: identifier,
+        otp: otp,
+        purpose: purpose,
+      });
     }
+ 
+    return res.status(200).json({
+      success: true,
+      message: "OTP sent successfully",
+      isNewUser,
+      isPhone: isPhone(identifier),
+      identifier,
+      purpose,
+    });
+  } catch (err) {
+    console.log("Send OTP Error :", err);
+ 
+    return res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
 };
+ 
 
 // ==============================
 // 2. VERIFY OTP
