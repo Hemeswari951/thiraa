@@ -18,10 +18,9 @@ class AppConfig {
       return 'http://localhost:3000';
     }
 
-    return 'https://f10a-2401-4900-cacc-5791-3cbb-b38e-92bd-61ca.ngrok-free.app';
-  }
+    return 'https://thiraa-edb6.onrender.com';
 }
-
+}
 class ApiService {
   static String get serverUrl => AppConfig.serverUrl;
   static String get baseUrl => '$serverUrl/api/shop-owner';
